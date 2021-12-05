@@ -142,6 +142,50 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		}
 
 		/**
+		 * Add a fee for auction items in cart.
+		 *
+		 * @param WC_Cart $cart the current cart.
+		 */
+		public function add_fee_for_auction_items( WC_Cart $cart ) {
+			if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+				return;
+			}
+
+			if ( ! get_option( 'yith_wcact_commissions_enabled', false ) || floatval( get_option( 'yith_wcact_commissions_amount', 0 ) ) == 0 ) {
+				return;
+			}
+
+			$commission_percentage = floatval( get_option( 'yith_wcact_commissions_amount', 0 ) );
+
+			$auction_items = array_filter(
+				array_values( $cart->get_cart() ),
+				function( array $cart_item ): bool {
+					$product = wc_get_product( $cart_item['product_id'] );
+					return $product->get_type() === 'auction';
+				}
+			);
+
+			$auction_total = array_reduce(
+				array_map(
+					function( array $cart_item ): float {
+						return $cart_item['line_total'];
+					},
+					$auction_items
+				),
+				function( float $carry, float $subtotal ): float {
+					return $carry + $subtotal;
+				},
+				0
+			);
+
+			$fee = $auction_total * $commission_percentage / 100;
+
+			if ( 0 != $fee ) {
+				$cart->add_fee( __( 'Auction commission', 'yith-auctions-commission' ), $fee );
+			}
+		}
+
+		/**
 		 * Add actions and filters.
 		 */
 		private function actions_and_filters() {
@@ -149,6 +193,7 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 			add_action( 'init', array( $this, 'init' ) );
 			add_filter( 'yit_plugin_fw_wc_panel_option_args', array( $this, 'alter_settings_page' ), 99 );
 			add_action( 'yith_wcact_after_add_button_bid', array( $this, 'show_commission' ) );
+			add_action( 'woocommerce_cart_calculate_fees', array( $this, 'add_fee_for_auction_items' ) );
 		}
 	}
 }

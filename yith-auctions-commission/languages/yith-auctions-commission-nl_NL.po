@@ -1,0 +1,75 @@
+# Copyright (C) 2021 Lars van Rhijn
+# This file is distributed under the same license as the YITH Auctions Commission plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: YITH Auctions Commission 0.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yith-auctions-"
+"commission\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-12-05T20:16:31+00:00\n"
+"PO-Revision-Date: 2021-12-05 21:20+0100\n"
+"X-Generator: Poedit 3.0\n"
+"X-Domain: yith-auctions-commission\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl_NL\n"
+
+#. Plugin Name of the plugin
+msgid "YITH Auctions Commission"
+msgstr "YITH Auctions Commission"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/KiOui/yith-auctions-commission"
+msgstr "https://github.com/KiOui/yith-auctions-commission"
+
+#. Description of the plugin
+msgid "An extension for YITH Auctions to add commissions to auctions"
+msgstr ""
+"Een extensie voor YITH Auctions om commissie toe te voegen aan veilingen"
+
+#. Author of the plugin
+msgid "Lars van Rhijn"
+msgstr "Lars van Rhijn"
+
+#. Author URI of the plugin
+msgid "https://larsvanrhijn.nl/"
+msgstr "https://larsvanrhijn.nl/"
+
+#: includes/class-yithaccore.php:139
+msgid ""
+"This Auction has a commission cost of %.1f%%. These costs will be calculated "
+"upon checkout."
+msgstr ""
+"Deze veiling heeft een commissie van 25%. Deze kosten worden berekend bij "
+"het afrekenen."
+
+#: includes/class-yithaccore.php:184
+msgid "Auction commission"
+msgstr "Veiling commissie"
+
+#: plugin-options/settings-options.php:14
+msgid "Compute commissions over completed auctions."
+msgstr "Bereken commissie kosten over voltooide veilingen."
+
+#: plugin-options/settings-options.php:22
+msgid "Commission amount (%)"
+msgstr "Commissie hoeveelheid (%)"
+
+#: yith-auctions-commission.php:33
+msgid ""
+"YITH Auctions Commission requires WooCommerce to be active. Please activate "
+"WooCommerce to use YITH Auctions Commission."
+msgstr ""
+"WooCommerce is nodig om YITH Auctions Commission te laten werken. Activeer "
+"eerst WooCommerce voordat je YITH Auctions Commission gebruikt."
+
+#: yith-auctions-commission.php:37
+msgid ""
+"YITH Auctions Commission requires YITH Auctions to be active. Please "
+"activate YITH Auctions to use YITH Auctions Commission."
+msgstr ""
+"YITH Auctions is nodig om YITH Auctions Commission te laten werken. Activeer "
+"eerst YITH Auctions voordat je YITH Auctions Commission gebruikt."
