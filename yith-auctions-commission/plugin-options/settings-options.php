@@ -11,10 +11,10 @@ $new_settings = array();
 foreach ( $settings['settings'] as $key => $value ) {
 	if ( 'settings_options_end' === $key ) {
 		$new_settings['settings_commission_amount_onoff'] = array(
-			'title'     => esc_html__( 'Compute commissions over completed auctions.', 'yith-auctions-commission' ),
+			'title'     => esc_html__( 'Compute commissions over completed auctions', 'yith-auctions-commission' ),
 			'type'      => 'yith-field',
 			'yith-type' => 'onoff',
-			'desc'      => esc_html__( 'Enable to compute commissions over completed auctions.', 'yith-auctions-commision' ),
+			'desc'      => esc_html__( 'Enable to compute commissions over completed auctions.', 'yith-auctions-commission' ),
 			'id'        => 'yith_wcact_commissions_enabled',
 			'default'   => 'no',
 		);
@@ -23,7 +23,7 @@ foreach ( $settings['settings'] as $key => $value ) {
 			'type'              => 'yith-field',
 			'yith-type'         => 'number',
 			'class'             => 'ywcact-input-text',
-			'desc'              => esc_html__( 'Set to compute commission percentage over completed auctions', 'yith-auctions-for-woocommerce' ),
+			'desc'              => esc_html__( 'Set to compute commission percentage over completed auctions.', 'yith-auctions-commission' ),
 			'id'                => 'yith_wcact_commissions_amount',
 			'step' => 0.1,
 			'min'  => 0,
