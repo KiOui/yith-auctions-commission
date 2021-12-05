@@ -130,12 +130,25 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		}
 
 		/**
+		 * Show commission notification when commission is set for auctions.
+		 */
+		public function show_commission() {
+			if ( get_option( 'yith_wcact_commissions_enabled', false ) && floatval( get_option( 'yith_wcact_commissions_amount', 0 ) ) != 0 ) {
+				$commission_percentage = floatval( get_option( 'yith_wcact_commissions_amount', 0 ) );
+				?>
+					<div class="yithac-commission-text"><?php echo esc_html( sprintf( __( 'This Auction has a commission cost of %.1f%%. These costs will be calculated upon checkout.', 'yith-auctions-commission' ), $commission_percentage ) ); ?></div>
+				<?php
+			}
+		}
+
+		/**
 		 * Add actions and filters.
 		 */
 		private function actions_and_filters() {
 			add_action( 'after_setup_theme', array( $this, 'pluggable' ) );
 			add_action( 'init', array( $this, 'init' ) );
 			add_filter( 'yit_plugin_fw_wc_panel_option_args', array( $this, 'alter_settings_page' ), 99 );
+			add_action( 'yith_wcact_after_add_button_bid', array( $this, 'show_commission' ) );
 		}
 	}
 }
