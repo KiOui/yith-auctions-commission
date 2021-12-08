@@ -43,8 +43,7 @@ msgid ""
 "This Auction has a commission cost of %.1f%%. These costs will be calculated "
 "upon checkout."
 msgstr ""
-"Deze veiling heeft een commissie van %.1f%%. Deze kosten worden berekend bij "
-"het afrekenen."
+"Uw bod is exclusief %.1f%% commissie."
 
 #: includes/class-yithaccore.php:184
 msgid "Auction commission"
