@@ -112,12 +112,6 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		}
 
 		/**
-		 * Add pluggable support to functions
-		 */
-		public function pluggable() {
-		}
-
-		/**
 		 * Alter the settings page plugin options folder.
 		 *
 		 * @param $args array arguments passed to YITH Admin panel
@@ -135,8 +129,9 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		public function show_commission() {
 			if ( get_option( 'yith_wcact_commissions_enabled', false ) && floatval( get_option( 'yith_wcact_commissions_amount', 0 ) ) != 0 ) {
 				$commission_percentage = floatval( get_option( 'yith_wcact_commissions_amount', 0 ) );
+				$commission_percentage_str = yithac_format_commission_percentage( $commission_percentage );
 				?>
-					<div class="yithac-commission-text"><?php echo esc_html( sprintf( __( 'This Auction has a commission cost of %.1f%%. These costs will be calculated upon checkout.', 'yith-auctions-commission' ), $commission_percentage ) ); ?></div>
+					<div class="yithac-commission-text"><?php echo esc_html( sprintf( __( 'This Auction has a commission cost of %s%%. These costs will be calculated upon checkout.', 'yith-auctions-commission' ), $commission_percentage_str ) ); ?></div>
 				<?php
 			}
 		}
@@ -181,8 +176,16 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 			$fee = $auction_total * $commission_percentage / 100;
 
 			if ( 0 != $fee ) {
-				$cart->add_fee( __( 'Auction commission', 'yith-auctions-commission' ), $fee );
+				$commission_percentage_str = yithac_format_commission_percentage( $commission_percentage );
+				$cart->add_fee( sprintf( __( 'Auction commission (%s%%)', 'yith-auctions-commission' ), $commission_percentage_str ), $fee );
 			}
+		}
+
+		/**
+		 * Add pluggable support to functions
+		 */
+		public function pluggable() {
+			include_once YITHAC_ABSPATH . 'includes/yithac-functions.php';
 		}
 
 		/**
