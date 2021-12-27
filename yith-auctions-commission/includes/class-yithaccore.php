@@ -114,13 +114,43 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		/**
 		 * Alter the settings page plugin options folder.
 		 *
-		 * @param $args array arguments passed to YITH Admin panel
+		 * @param $settings array current auctions settings
 		 *
-		 * @return array arguments for YITH Admin panel
+		 * @return array auctions settings with added commission setting
 		 */
-		public function alter_settings_page( array $args ) {
-			$args['options-path'] = YITHAC_ABSPATH . 'plugin-options';
-			return $args;
+		public function alter_settings_page( array $settings ): array {
+			$new_settings = array();
+			foreach ( $settings['general-auctions'] as $key => $value ) {
+				$new_settings[ $key ] = $value;
+				if ( 'settings_enable_watchlist' === $key ) {
+					$new_settings['settings_commission_amount_onoff'] = array(
+						'title'     => esc_html__( 'Compute commissions over completed auctions', 'yith-auctions-commission' ),
+						'type'      => 'yith-field',
+						'yith-type' => 'onoff',
+						'desc'      => esc_html__( 'Enable to compute commissions over completed auctions.', 'yith-auctions-commission' ),
+						'id'        => 'yith_wcact_commissions_enabled',
+						'default'   => 'no',
+					);
+					$new_settings['settings_commission_amount'] = array(
+						'title'             => esc_html__( 'Commission amount (%)', 'yith-auctions-commission' ),
+						'type'              => 'yith-field',
+						'yith-type'         => 'number',
+						'class'             => 'ywcact-input-text',
+						'desc'              => esc_html__( 'Set to compute commission percentage over completed auctions.', 'yith-auctions-commission' ),
+						'id'                => 'yith_wcact_commissions_amount',
+						'step' => 0.1,
+						'min'  => 0,
+						'default'           => 0,
+						'deps'              => array(
+							'id'    => 'yith_wcact_commissions_enabled',
+							'value' => 'yes',
+							'type'  => 'hide',
+						),
+					);
+				}
+			}
+			$settings['general-auctions'] = $new_settings;
+			return $settings;
 		}
 
 		/**
@@ -194,7 +224,7 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		private function actions_and_filters() {
 			add_action( 'after_setup_theme', array( $this, 'pluggable' ) );
 			add_action( 'init', array( $this, 'init' ) );
-			add_filter( 'yit_plugin_fw_wc_panel_option_args', array( $this, 'alter_settings_page' ), 99 );
+			add_filter( 'yith_wcact_general_options_auction_options', array( $this, 'alter_settings_page' ), 99 );
 			add_action( 'yith_wcact_after_add_button_bid', array( $this, 'show_commission' ) );
 			add_action( 'woocommerce_cart_calculate_fees', array( $this, 'add_fee_for_auction_items' ) );
 		}
