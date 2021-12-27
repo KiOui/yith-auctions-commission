@@ -3,7 +3,7 @@
  * Plugin Name: YITH Auctions Commission
  * Description: An extension for YITH Auctions to add commissions to auctions
  * Plugin URI: https://github.com/KiOui/yith-auctions-commission
- * Version: 0.0.1
+ * Version: 0.0.2
  * Author: Lars van Rhijn
  * Author URI: https://larsvanrhijn.nl/
  * Text Domain: yith-auctions-commission

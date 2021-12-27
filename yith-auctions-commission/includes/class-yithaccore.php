@@ -22,7 +22,7 @@ if ( ! class_exists( 'YithAcCore' ) ) {
 		 *
 		 * @var string
 		 */
-		public string $version = '0.0.1';
+		public string $version = '0.0.2';
 
 		/**
 		 * The single instance of the class
